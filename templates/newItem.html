@@ -1,0 +1,34 @@
+<!-- Webpage to add a new item to the database -->
+
+<html>
+<body>
+
+<h1>New Catalog Item</h1>
+
+<form action = "{{url_for('newItem')}}"
+      method = 'POST'>
+
+<p>Title:</p>
+<input type = 'text' size = '30' name = 'title'>
+
+<p>Description:</p>
+<input type = 'text' size = '30' name = 'description'>
+
+<p>Category:</p>
+<select name = 'category'>
+  {% for c in category %}
+  <option value = '{{c.id}}'>{{c.name}}</option>
+  {% endfor %}
+</select>
+
+</br></br>
+
+<input type = 'submit' value = 'Create'>
+
+</form>
+
+<a href = "{{url_for('catalogHome')}}">
+  Cancel</a>
+
+</body>
+</html>

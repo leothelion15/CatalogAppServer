@@ -1,0 +1,57 @@
+<!-- The main landing page of the app, once signed in -->
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <link rel = stylesheet type = text/css href = "{{url_for('static',
+        filename = 'style.css')}}">
+</head>
+
+<body>
+  <div class = header>
+    <a href = '{{url_for('catalogHome')}}' class = homeButton>
+      Catalog App</a>
+
+    <div class = buttons>
+    <a href = '{{url_for('newCategory')}}' class = addNewButton>Add New Category</a>
+    <a href = '{{url_for('newItem')}}' class = addNewButton>Add New Item</a>
+    <a href = '{{url_for('gdisconnect')}}' class = signInButton>Log Out</a>
+  </div>
+  </div>
+
+  </br>
+
+  <div class = 'flash'>
+  		      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul>
+          {% for message in messages %}
+              <strong> {{ message }} </strong>
+          {% endfor %}
+          </ul>
+          {% endif %}
+      {% endwith %}
+  </div>
+
+  <div class = mainContent>
+
+  <div class = categoryList>
+    <h2>Catagories</h2>
+    {% for c in catalog %}
+    <a href = '{{url_for('categoryItems', category_name = c.name)}}'><h3>{{c.name}}</h3></a>
+    {% endfor %}
+  </div>
+
+  <div class = latestItems>
+    <h2>Latest Items</h2>
+    {% for i in items %}
+    <p>{{i.title}}</p>
+    {% endfor %}
+  </div>
+
+  </div
+
+</body>
+</html>

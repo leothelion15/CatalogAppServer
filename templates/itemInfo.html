@@ -1,0 +1,35 @@
+<!-- Public view of information about an item -->
+
+<html>
+
+<head>
+  <link rel = stylesheet type = text/css href = "{{url_for('static',
+        filename = 'style.css')}}">
+</head>
+
+<body>
+
+  <div class = header>
+    <a href = '{{url_for('catalogHome')}}' class = homeButton>
+      Catalog App</a>
+
+    <a href = '{{url_for('showLogin')}}' class = signInButton>Sign In Here</a>
+  </div>
+
+  <div class = mainContent>
+    <div class = itemsListDetail>
+      <h2>{{category_name}} Items</h2>
+      {% for i in categoryItems %}
+      <a href = '{{url_for('itemInfo', category_name = category_name, item_name = i.title)}}'><h3>{{i.title}}<h3></a>
+      {% endfor %}
+    </div>
+
+    <div class = itemDetails>
+      <h2>{{item.title}}</h2>
+      <p>{{item.description}}</p>
+      </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!-- Webpage for logged in user listing all items in a categrory
+and allows for adding items -->
+
+<!DOCTYPE html>
+
+<html>
+
+<header>
+  <link rel = stylesheet type = text/css href = "{{url_for('static',
+        filename = 'style.css')}}">
+</header>
+
+<body>
+
+  <div class = header>
+    <a href = '{{url_for('catalogHome')}}' class = homeButton>
+      Catalog App</a>
+
+      <div class = buttons>
+      <a href = '{{url_for('newCategory')}}' class = addNewButton>Add New Category</a>
+      <a href = '{{url_for('newItem')}}' class = addNewButton>Add New Item</a>
+      <a href = '{{url_for('gdisconnect')}}' class = signInButton>Log Out</a>
+    </div>
+  </div>
+
+  <div class = 'flash'>
+            {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul>
+          {% for message in messages %}
+            <strong> {{ message }} </strong>
+          {% endfor %}
+          </ul>
+          {% endif %}
+      {% endwith %}
+  </div>
+
+  <div class = mainContent>
+
+    <div class = categoryList>
+      <h2>Catagories</h2>
+      {% for c in catalog %}
+      <a href = '{{url_for('categoryItems', category_name = c.name)}}'><h3>{{c.name}}</h3></a>
+      {% endfor %}
+    </div>
+
+    <div class = itemsList>
+      <h2>{{category.name}} Items</h2>
+      {% for i in items %}
+        <a href = '{{url_for('itemInfo', category_name = category.name, item_name = i.title)}}'><h3>{{i.title}}<h3></a>
+      {% endfor %}
+    </div>
+
+  </div>
+
+</body>
+
+</html>

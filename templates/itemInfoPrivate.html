@@ -1,0 +1,46 @@
+<!-- Private view of information about an item.
+Any logged in user can add new items, but only the person who
+created the item can edit or delete it. -->
+
+<html>
+
+<head>
+  <link rel = stylesheet type = text/css href = "{{url_for('static',
+        filename = 'style.css')}}">
+</head>
+
+<body>
+
+  <div class = header>
+    <a href = '{{url_for('catalogHome')}}' class = homeButton>
+      Catalog App</a>
+
+      <div class = buttons>
+      <a href = '{{url_for('newCategory')}}' class = addNewButton>Add New Category</a>
+      <a href = '{{url_for('newItem')}}' class = addNewButton>Add New Item</a>
+      <a href = '{{url_for('gdisconnect')}}' class = signInButton>Log Out</a>
+    </div>
+  </div>
+
+<div class = mainContent>
+
+    <div class = itemsListDetail>
+      <h2>{{category_name}} Items</h2>
+      {% for i in categoryItems %}
+      <a href = '{{url_for('itemInfo', category_name = category_name, item_name = i.title)}}'><h3>{{i.title}}<h3></a>
+      {% endfor %}
+    </div>
+
+    <div class = itemDetails>
+      <h2>{{item.title}}</h2>
+      <p>{{item.description}}</p>
+      {% if userID == item.user_id %}
+        <a href = '{{url_for('editItem', category_name = category_name, item_name = item.title)}}'>Edit</a>
+        <a href = '{{url_for('deleteItem', category_name = category_name, item_name = item.title)}}'>Delete</a></br>
+      {% endif %}
+    </div>
+  </div>
+
+</body>
+
+</html>

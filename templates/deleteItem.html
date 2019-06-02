@@ -1,0 +1,31 @@
+<!-- Webpage to allow an item to be deleted -->
+
+<html>
+
+<header>
+  <link rel = stylesheet type = text/css href = "{{url_for('static',
+        filename = 'style.css')}}">
+</header>
+
+<body>
+
+  <div class = header>
+    <a href = '{{url_for('catalogHome')}}' class = homeButton>
+      Catalog App</a>
+  </div>
+
+  <h2> Are you sure you want to delete {{item.title}}?</h2>
+
+  <form action = "{{url_for('deleteItem', category_name = category_name,
+                    item_name = item.title)}}" method = 'POST'>
+
+  <input type = 'submit', value = 'Delete'>
+
+  </form>
+
+  <a href = "{{url_for('itemInfo', category_name = category_name, item_name = item.title)}}">
+    Cancel</a>
+
+</body>
+
+</html>
